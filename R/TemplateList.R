@@ -36,6 +36,8 @@ TemplateListViewServer <- function(input,output,session,dms_token,erp_token) {
       tsda::db_writeTable2(token  = erp_token,table_name = 'rds_t_TemplateList_input',r_object = data,append = TRUE)
 
       mdlJHReportItemPkg::TemplateList_inputdelete(erp_token = erp_token)
+
+      mdlJHReportItemPkg::TemplateList_delete(erp_token = erp_token)
       mdlJHReportItemPkg::TemplateList_insert(erp_token = erp_token)
       mdlJHReportItemPkg::TemplateList_truncate(erp_token = erp_token)
 

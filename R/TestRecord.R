@@ -41,6 +41,8 @@ TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
       tsda::db_writeTable2(token  = erp_token,table_name = 'rds_t_TestRecord_input',r_object = data,append = TRUE)
 
       mdlJHReportItemPkg::TestRecord_inputdelete(erp_token = erp_token)
+
+      mdlJHReportItemPkg::TestRecord_delete(erp_token = erp_token)
       mdlJHReportItemPkg::TestRecord_insert(erp_token = erp_token)
       mdlJHReportItemPkg::TestRecord_truncate(erp_token = erp_token)
 

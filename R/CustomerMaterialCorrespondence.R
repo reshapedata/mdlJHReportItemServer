@@ -38,6 +38,7 @@ CustomerMaterialCorrespondenceViewServer <- function(input,output,session,dms_to
       tsda::db_writeTable2(token  = erp_token,table_name = 'rds_t_CustomerMaterialCorrespondence_input',r_object = data,append = TRUE)
 
       mdlJHReportItemPkg::CustomerMaterialCorrespondence_inputdelete(erp_token = erp_token)
+      mdlJHReportItemPkg::CustomerMaterialCorrespondence_delete(erp_token = erp_token)
       mdlJHReportItemPkg::CustomerMaterialCorrespondence_insert(erp_token = erp_token)
       mdlJHReportItemPkg::CustomerMaterialCorrespondence_truncate(erp_token = erp_token)
 
