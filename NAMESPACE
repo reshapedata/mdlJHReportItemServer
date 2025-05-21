@@ -2,6 +2,8 @@
 
 export(CustomerMaterialCorrespondenceServer)
 export(CustomerMaterialCorrespondenceViewServer)
+export(CustomerTemplatesServer)
+export(CustomerTemplatesViewServer)
 export(ProductQualityServer)
 export(ProductQualityViewServer)
 export(TemplateListServer)
