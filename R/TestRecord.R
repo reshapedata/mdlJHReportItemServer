@@ -68,6 +68,19 @@ TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
 
   })
 
+  #处理COA报告
+  #处理相关数据
+  shiny::observeEvent(input$btn_coa_gen,{
+    info_coa = mdlJHReportItemPkg::coa_SyncAll(erpToken = erp_token,outputDir = outputDir,delete_localFiles = 1)
+    if(info_coa){
+      tsui::pop_notice(paste0("COA报告更新成功,更新",info_coa,"条记录"))
+    }else{
+      tsui::pop_notice(paste0("COA报告更新失败,没有待更新的数据或COA模板为空"))
+    }
+
+  })
+
+
 
 
 
