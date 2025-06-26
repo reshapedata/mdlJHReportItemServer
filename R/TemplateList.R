@@ -25,7 +25,7 @@ TemplateListViewServer <- function(input,output,session,dms_token,erp_token) {
     else{
       filename=text_flie_TemplateList()
       data <- readxl::read_excel(filename,
-                                 col_types = c("text", "text", "numeric"))
+                                 col_types = c("text", "text", "numeric", "text"))
 
 
       data = as.data.frame(data)
