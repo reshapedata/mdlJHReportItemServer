@@ -24,10 +24,10 @@ ProductQualityViewServer <- function(input,output,session,dms_token,erp_token) {
     }
     else{
       filename=text_flie_ProductQuality()
-      data <- readxl::read_excel(filename, col_types = c("text", "text", "text",
-                                                           "text", "text", "text", "text", "text",
-                                                           "text", "text", "text", "text", "text",
-                                                           "text", "text", "text"))
+      data <- readxl::read_excel(filename, col_types = c("text", "text", "text", "text",
+                                                         "text", "text", "text", "text", "text",
+                                                         "text", "text", "text", "text", "text",
+                                                         "text", "text", "text"))
 
 
       data = as.data.frame(data)
