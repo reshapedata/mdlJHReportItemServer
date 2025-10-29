@@ -15,6 +15,8 @@
 #' TestRecordViewServer()
 TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
   text_flie_TestRecord = tsui::var_file('text_flie_TestRecord')
+  text_date_TestRecord = tsui::var_date('text_date_TestRecord')
+
 
 
   shiny::observeEvent(input$btn_TestRecord_Up,{
@@ -73,6 +75,31 @@ TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
     data = mdlJHReportItemPkg::RPAtask_select(erp_token =erp_token )
 
     tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+
+  })
+
+
+
+  shiny::observeEvent(input$btn_coa_genByDate,{
+    FDate = text_date_TestRecord()
+    data = mdlJHReportItemPkg::COA_selectByDate(erp_token = erp_token,FDate = FDate)
+
+    tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+    tsui::run_download_xlsx(id = 'dl_TestRecordByDate',data = data,filename = 'COA按日期查询数据.xlsx')
+
+
+  })
+  shiny::observeEvent(input$btn_coa_genByMonth,{
+    FDate = text_date_TestRecord()
+
+    data = mdlJHReportItemPkg::COA_selectByMonth(erp_token = erp_token,FDate = FDate)
+
+    tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+    tsui::run_download_xlsx(id = 'dl_TestRecordByMonth',data = data,filename = 'COA按月查询数据.xlsx')
+
 
 
   })
