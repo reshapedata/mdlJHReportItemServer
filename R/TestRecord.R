@@ -15,6 +15,19 @@
 #' TestRecordViewServer()
 TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
   text_flie_TestRecord = tsui::var_file('text_flie_TestRecord')
+  text_date_TestRecord = tsui::var_date('text_date_TestRecord')
+  #处理COA报告
+  #处理相关数据
+  shiny::observeEvent(input$btn_coa_gen_sal,{
+    info_coa = mdlJHReportItemr::coa_SyncAll(erpToken = erp_token,outputDir = outputDir,delete_localFiles = 1)
+    if(info_coa){
+      tsui::pop_notice(paste0("COA报告更新成功,更新",info_coa,"条记录"))
+    }else{
+      tsui::pop_notice(paste0("COA报告更新失败,没有待更新的数据或COA模板为空"))
+    }
+
+  })
+
 
 
   shiny::observeEvent(input$btn_TestRecord_Up,{
@@ -73,6 +86,31 @@ TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
     data = mdlJHReportItemPkg::RPAtask_select(erp_token =erp_token )
 
     tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+
+  })
+
+
+
+  shiny::observeEvent(input$btn_coa_genByDate,{
+    FDate = text_date_TestRecord()
+    data = mdlJHReportItemPkg::COA_selectByDate(erp_token = erp_token,FDate = FDate)
+
+    tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+    tsui::run_download_xlsx(id = 'dl_TestRecordByDate',data = data,filename = 'COA按日期查询数据.xlsx')
+
+
+  })
+  shiny::observeEvent(input$btn_coa_genByMonth,{
+    FDate = text_date_TestRecord()
+
+    data = mdlJHReportItemPkg::COA_selectByMonth(erp_token = erp_token,FDate = FDate)
+
+    tsui::run_dataTable2(id ='TestRecord_resultView' ,data =data )
+
+    tsui::run_download_xlsx(id = 'dl_TestRecordByMonth',data = data,filename = 'COA按月查询数据.xlsx')
+
 
 
   })
