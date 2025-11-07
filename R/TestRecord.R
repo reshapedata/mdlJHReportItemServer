@@ -16,6 +16,17 @@
 TestRecordViewServer <- function(input,output,session,dms_token,erp_token) {
   text_flie_TestRecord = tsui::var_file('text_flie_TestRecord')
   text_date_TestRecord = tsui::var_date('text_date_TestRecord')
+  #处理COA报告
+  #处理相关数据
+  shiny::observeEvent(input$btn_coa_gen_sal,{
+    info_coa = mdlJHReportItemr::coa_SyncAll(erpToken = erp_token,outputDir = outputDir,delete_localFiles = 1)
+    if(info_coa){
+      tsui::pop_notice(paste0("COA报告更新成功,更新",info_coa,"条记录"))
+    }else{
+      tsui::pop_notice(paste0("COA报告更新失败,没有待更新的数据或COA模板为空"))
+    }
+
+  })
 
 
 
